@@ -9,3 +9,9 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+export type ThunkApiConfig = {
+	state: RootState
+	dispatch: AppDispatch
+	rejectValue: AnyErrorType
+	extra: AnyExtraArgumentType
+}

@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux"
 import { Todo } from "./types"
-import { deleteTodo, toggleTodoComplete } from "../../store/todoStore"
+import { removeTodo, toggleTodoComplete } from "../../store/todoStore"
+import { AppDispatch } from "../../store"
 
 export function TodoItem({ todo }: { todo: Todo }) {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	return (
 		<li className="flex px-1 rounded-sm overflow-auto  bg-third">
 			<input
@@ -18,7 +19,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
 			</span>
 			<button
 				className="ml-auto px-1"
-				onClick={() => dispatch(deleteTodo({ id: todo.id }))}
+				onClick={() => dispatch(removeTodo(todo.id))}
 			>
 				&times;
 			</button>

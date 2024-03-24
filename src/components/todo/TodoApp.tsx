@@ -8,9 +8,7 @@ import { fetchTodos } from "../../store/todoStore"
 import { Loader } from "../uikit/Loader/Loader"
 
 export function TodoApp() {
-	const { todos, status, error } = useSelector(
-		(state: RootState) => state.todos,
-	)
+	const { todoList, status } = useSelector((state: RootState) => state.todos)
 	const dispatch = useDispatch<AppDispatch>()
 	useEffect(() => {
 		dispatch(fetchTodos())
@@ -26,7 +24,7 @@ export function TodoApp() {
 	return (
 		<TodoAppLayout
 			input={<TodoInput />}
-			todoList={todos.map((todo) => (
+			todoList={todoList.map((todo) => (
 				<TodoItem key={todo.id} todo={todo} />
 			))}
 		/>
