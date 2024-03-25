@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "../../store"
+import { useAppDispatch, useAppSelector } from "../../store"
 import { TodoAppLayout } from "./TodoAppLayout"
 import { TodoInput } from "./TodoInput"
 import { TodoItem } from "./TodoItem"
@@ -8,17 +7,17 @@ import { fetchTodos } from "../../store/todoStore"
 import { Loader } from "../uikit/Loader/Loader"
 
 export function TodoApp() {
-	const { todoList, status } = useSelector((state: RootState) => state.todos)
-	const dispatch = useDispatch<AppDispatch>()
+	const { todoList, loading, error } = useAppSelector((state) => state.todos)
+	const dispatch = useAppDispatch()
 	useEffect(() => {
 		dispatch(fetchTodos())
 	}, [])
 
-	if (status === "pending") {
+	if (loading) {
 		return <TodoAppLayout input={<TodoInput />} todoList={<Loader />} />
 	}
-	if (status === "rejected") {
-		return <div>error </div>
+	if (error) {
+		return <div>error {error}</div>
 	}
 
 	return (

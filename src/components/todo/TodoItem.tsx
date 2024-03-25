@@ -1,17 +1,16 @@
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../../store"
 import { Todo } from "./types"
-import { removeTodo, toggleTodoComplete } from "../../store/todoStore"
-import { AppDispatch } from "../../store"
+import { removeTodo, toggleTodoCompleted } from "../../store/todoStore"
 
 export function TodoItem({ todo }: { todo: Todo }) {
-	const dispatch = useDispatch<AppDispatch>()
+	const dispatch = useAppDispatch()
 	return (
 		<li className="flex px-1 rounded-sm overflow-auto  bg-third">
 			<input
 				className="bg-second mx-1"
 				type="checkbox"
 				checked={todo.completed}
-				onChange={() => dispatch(toggleTodoComplete({ id: todo.id }))}
+				onChange={() => dispatch(toggleTodoCompleted(todo.id))}
 			/>
 
 			<span className="p-1 grow whitespace-pre-line break-all">

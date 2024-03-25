@@ -1,13 +1,13 @@
 import { memo, useState } from "react"
-import { useDispatch } from "react-redux"
 import { addTodo } from "../../store/todoStore"
+import { useAppDispatch } from "../../store"
 
 export const TodoInput = memo(function TodoInput() {
 	console.log("input render")
 	const [text, setText] = useState("")
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	const handleAddTodo = () => {
-		dispatch(addTodo({ text }))
+		dispatch(addTodo(text))
 		setText("")
 	}
 	return (
